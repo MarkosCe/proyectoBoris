@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "447915651928",
+    "project_id": "proyectoboris-625ac",
+    "storage_bucket": "proyectoboris-625ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447915651928:android:b570e3ead393ef720beb2d",
+        "android_client_info": {
+          "package_name": "com.proyect.proyectoboris"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447915651928-1np2qr2b2et4rajgu8v0j4493bgofe5u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyect.proyectoboris",
+            "certificate_hash": "8fbce332be37f2dbe0dc9e69157ded74b52d96e9"
+          }
+        },
+        {
+          "client_id": "447915651928-0cvh0ct147k3nm4kqgdjajokt70aa5d0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKYQ4115LnEQD6k3bHULHP58NvbmDcn5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447915651928-0cvh0ct147k3nm4kqgdjajokt70aa5d0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
