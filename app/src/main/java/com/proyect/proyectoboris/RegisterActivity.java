@@ -17,10 +17,14 @@ public class RegisterActivity extends AppCompatActivity {
     CountryCodePicker mCountryCode;
     EditText mEditTextPhone;
 
+    AuthProvider mAuthProvider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mAuthProvider = new AuthProvider();
 
         mButtonEnviar = findViewById(R.id.buttonEnviarCodigo);
         mCountryCode = findViewById(R.id.ccp);
@@ -46,4 +50,13 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(mAuthProvider.existSession()){
+            Intent intent = new Intent(RegisterActivity.this, MapUserActivity.class);
+            startActivity(intent);
+        }
+    }
 }

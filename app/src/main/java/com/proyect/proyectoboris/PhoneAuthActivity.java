@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,29 +17,44 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 public class PhoneAuthActivity extends AppCompatActivity {
 
     String mExtraPhone;
     String mVerificationId;
 
+    TextView mTextViewVerificar;
+    TextView mTextViewMsgCheck;
+
     Button mButtonCodeVerification;
     EditText mEditTextCodeVerification;
 
     AuthProvider mAuthProvider;
+
+    UserProvider mUserProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_auth);
 
+        mTextViewVerificar = findViewById(R.id.textViewCheck);
+        mTextViewMsgCheck = findViewById(R.id.textViewMsgCheck);
+
         mButtonCodeVerification = findViewById(R.id.btnCodeVerification);
         mEditTextCodeVerification = findViewById(R.id.editTextCodeVerification);
 
         mAuthProvider = new AuthProvider();
 
+        mUserProvider = new UserProvider();
+
         mExtraPhone = getIntent().getStringExtra("phone");
-        Toast.makeText(PhoneAuthActivity.this, "Telefono: " + mExtraPhone, Toast.LENGTH_LONG).show();
+        mTextViewVerificar.setText("Verificar " + mExtraPhone);
+        mTextViewMsgCheck.setText("Esperando para detectar automáticamente el SMS enviado al " + mExtraPhone);
+        //Toast.makeText(PhoneAuthActivity.this, "Telefono: " + mExtraPhone, Toast.LENGTH_LONG).show();
 
         mAuthProvider.sendCodeVerification(mExtraPhone, mcallbacks, this);
 
@@ -94,12 +110,47 @@ public class PhoneAuthActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     //EL USUARIO YA INICIO SESION CORRECTAMENTE
-                    Intent intent = new Intent(PhoneAuthActivity.this, MapUserActivity.class);
-                    startActivity(intent);
+
+                    mUserProvider.getUser(mAuthProvider.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                Intent intent = new Intent(PhoneAuthActivity.this, MapUserActivity.class);
+                                startActivity(intent);
+                            }else{
+                                createInfo();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }else{
                     Toast.makeText(PhoneAuthActivity.this, "No se pudo iniciar sesion", Toast.LENGTH_SHORT).show();
                 }
             }
+
+            private void createInfo() {
+                User user = new User();
+                user.setId(mAuthProvider.getId());
+                user.setPhone(mExtraPhone);
+
+                mUserProvider.create(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> taskCreate) {
+                        if(taskCreate.isSuccessful()){
+                            Intent intent = new Intent(PhoneAuthActivity.this, RegisterUserActivity.class);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(PhoneAuthActivity.this, "No se pudo crear", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
         });
     }
 }

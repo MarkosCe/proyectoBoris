@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">proyectoBoris</string>
     <string name="message_phone">Locator te enviará un mensaje SMS para verificar tu número de teléfono</string>
+    <string name="msg_check">Esperando para detectar automáticamente el SMS enviado al %1$s</string>
 </resources>

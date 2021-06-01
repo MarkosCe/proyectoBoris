@@ -10,11 +10,14 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button mButtonIniciar;
+    AuthProvider mAuthProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuthProvider = new AuthProvider();
 
         mButtonIniciar = findViewById(R.id.buttonIniciar);
 
@@ -24,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
                 goToRegister();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(mAuthProvider.existSession()){
+            Intent intent = new Intent(MainActivity.this, MapUserActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void goToRegister() {
