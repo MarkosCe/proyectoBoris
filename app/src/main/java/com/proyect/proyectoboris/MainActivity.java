@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, MapUserActivity.class);
             startActivity(intent);
         }
-    }
+    }*/
 
     private void goToRegister() {
         Intent intent = new Intent(MainActivity.this, RegisterActivity.class);

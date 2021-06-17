@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimary"
     tools:context=".PhoneAuthActivity">
 
     <LinearLayout
@@ -63,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="Ingresar"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/colorPrimary"
                 android:layout_gravity="bottom"/>
 
         </LinearLayout>

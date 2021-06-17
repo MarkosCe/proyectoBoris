@@ -27,6 +27,7 @@ public class UserProvider {
         map.put("name", user.getName());
         map.put("email",user.getEmail());
         map.put("image", user.getImage());
+        map.put("code", user.getCode());
         return mDataBase.child(user.getId()).updateChildren(map);
     }
 }

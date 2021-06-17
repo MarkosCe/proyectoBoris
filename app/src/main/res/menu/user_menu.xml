@@ -2,16 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/opcion_uno"
-        android:title="Opcion 1"
+    <item android:id="@+id/ver_codigo"
+        android:title="Ver codigo"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/opcion_dos"
-        android:title="Opcion 2"
-        app:showAsAction="never"/>
-
-    <item android:id="@+id/opcion_tres"
-        android:title="Opcion 3"
+    <item android:id="@+id/ingresar_codigo"
+        android:title="Ingresar codigo"
         app:showAsAction="never"/>
 
 </menu>

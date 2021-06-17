@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimary"
     tools:context="com.proyect.proyectoboris.RegisterActivity">
 
     <LinearLayout
@@ -25,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Ingresa tu número de teléfono"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="25dp"
             android:layout_marginTop="30dp"
             android:gravity="center"/>
@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:text="@string/message_phone"
             android:textAlignment="center"
+            android:textColor="@color/black2"
             android:textSize="15dp"
             android:layout_margin="15dp"/>
 
@@ -72,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="ENVIAR CODIGO"/>
 
         </LinearLayout>

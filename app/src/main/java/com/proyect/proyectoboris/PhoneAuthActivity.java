@@ -21,6 +21,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
+
 public class PhoneAuthActivity extends AppCompatActivity {
 
     String mExtraPhone;
@@ -137,6 +139,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
                 User user = new User();
                 user.setId(mAuthProvider.getId());
                 user.setPhone(mExtraPhone);
+                //user.setCode(generateCode());
 
                 mUserProvider.create(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -153,4 +156,11 @@ public class PhoneAuthActivity extends AppCompatActivity {
 
         });
     }
+
+    /*private String generateCode(){
+        Random r = new Random();
+        int n = 100000 + r.nextInt(900000);
+        return String.valueOf(n);
+    }*/
+
 }

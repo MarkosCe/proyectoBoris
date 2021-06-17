@@ -13,6 +13,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Random;
+
 public class RegisterUserActivity extends AppCompatActivity {
 
     AuthProvider mAuthProvider;
@@ -21,6 +23,8 @@ public class RegisterUserActivity extends AppCompatActivity {
     TextInputEditText mTextInputName;
     TextInputEditText mTextInputEmail;
     Button mButtonCreateProfile;
+
+    String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +49,14 @@ public class RegisterUserActivity extends AppCompatActivity {
     void clickRegister(){
         final String name = mTextInputName.getText().toString();
         final String email = mTextInputEmail.getText().toString();
+        code = generateCode();
 
         if(!name.isEmpty() && !email.isEmpty()){
             User user = new User();
             user.setId(mAuthProvider.getId());
             user.setName(name);
             user.setEmail(email);
+            user.setCode(code);
 
             update(user);
         }else{
@@ -65,6 +71,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Intent intent = new Intent(RegisterUserActivity.this, MapUserActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("codigo", code);
                     startActivity(intent);
                 }else{
                     Toast.makeText(RegisterUserActivity.this, "No se pudo crear el usuario", Toast.LENGTH_SHORT).show();
@@ -72,4 +79,11 @@ public class RegisterUserActivity extends AppCompatActivity {
             }
         });
     }
+
+    private String generateCode(){
+        Random r = new Random();
+        int n = 100000 + r.nextInt(900000);
+        return String.valueOf(n);
+    }
+
 }

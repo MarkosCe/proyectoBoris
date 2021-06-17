@@ -6,17 +6,19 @@ public class User {
     String email;
     String image;
     String phone;
+    String code;
 
     public User(){
 
     }
 
-    public User(String id, String name, String email, String image, String phone) {
+    public User(String id, String name, String email, String image, String phone, String code) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.image = image;
         this.phone = phone;
+        this.code = code;
     }
 
     public String getId() {
@@ -57,5 +59,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

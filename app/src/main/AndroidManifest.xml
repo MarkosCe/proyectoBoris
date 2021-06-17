@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoBoris">
-        <activity android:name=".RegisterUserActivity"></activity>
+        <activity android:name=".EnteredCodeActivity"></activity>
+        <activity android:name=".CodeActivity" />
+        <activity android:name=".RegisterUserActivity" />
         <activity android:name=".MapUserActivity" />
         <activity android:name=".PhoneAuthActivity" />
         <activity android:name=".RegisterActivity" />
@@ -27,7 +29,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
     </application>
 
 </manifest>

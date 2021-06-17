@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
 
@@ -58,5 +58,5 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(RegisterActivity.this, MapUserActivity.class);
             startActivity(intent);
         }
-    }
+    }*/
 }
