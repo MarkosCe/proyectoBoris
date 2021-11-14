@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*@Override
-    protected void onStart() {
+    /*protected void onStart() {
         super.onStart();
 
         if(mAuthProvider.existSession()){

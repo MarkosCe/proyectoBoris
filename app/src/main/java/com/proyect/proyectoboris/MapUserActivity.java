@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -20,6 +21,9 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -39,6 +43,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -48,10 +53,15 @@ import java.util.List;
 
 public class MapUserActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private ImageButton mImageButtonMessage;
+
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
     private AuthProvider mAuthProvider;
     private UserProvider mUserProvider;
+
+    //private FirebaseAuth firebaseAuth;
+    private String name = "Tu estás aquí";
 
     private GeofireProvider mGeofireProvider;
 
@@ -87,7 +97,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                     mMarker = mMap.addMarker(new MarkerOptions().position(
                             new LatLng(location.getLatitude(), location.getLongitude())
                             )
-                            .title("Tu estas aquí")
+                            .title("Tu estás aquí")
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_user))
                     );
                     //OBTENER LA LOCALIZACION DEL USUARIO EN TIEMPO REAL
@@ -117,9 +127,13 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
         MyToolbar.show(this, "Mapa", false);
 
+        mImageButtonMessage = findViewById(R.id.imageButtonMessage);
+
         mAuthProvider = new AuthProvider();
         mUserProvider = new UserProvider();
         mGeofireProvider = new GeofireProvider();
+        //firebaseAuth = FirebaseAuth.getInstance();
+        name = mUserProvider.getUser(mAuthProvider.getId()).child("name").getKey();
 
        //code = getIntent().getStringExtra("codigo");
 
@@ -129,6 +143,16 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         mMapFragment.getMapAsync(this);
 
         obtenerCodigo();
+        //Toast.makeText(this, "code:"+code, Toast.LENGTH_LONG).show();
+
+        //boton del mensajee
+        mImageButtonMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapUserActivity.this, MessageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -146,6 +170,9 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         }else if(item.getItemId() == R.id.ingresar_codigo){
             Intent intent = new Intent(MapUserActivity.this, EnteredCodeActivity.class);
             startActivity(intent);
+        }else if(item.getItemId() == R.id.emergency){
+            Intent intent = new Intent(MapUserActivity.this, EmergencyActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -156,6 +183,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
                 code = user.code;
+                Toast.makeText(MapUserActivity.this, "code: "+code, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -187,9 +215,9 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                 }
 
                 LatLng userLatLng = new LatLng(location.latitude, location.longitude);
-                Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title("usuario").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_user)));
-                marker.setTag(key);
-                mUsersMarkers.add(marker);
+                //Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title("Usuario 1").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
+                //marker.setTag(key);
+                //mUsersMarkers.add(marker);
             }
 
             @Override

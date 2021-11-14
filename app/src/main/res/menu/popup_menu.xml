@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/message1"
+        android:title="Hola!"
+        android:icon="@drawable/icon_send"/>
+
+    <item android:id="@+id/message2"
+        android:title="Estoy bien!"/>
+
+    <item android:id="@+id/message10"
+        android:title="Estoy en el trabajo"/>
+
+    <item android:id="@+id/message3"
+        android:title="He llegado a mi destino"/>
+
+    <item android:id="@+id/message4"
+        android:title="Estoy en el tráfico"/>
+
+    <item android:id="@+id/message5"
+        android:title="Llegaré tarde"/>
+
+    <item android:id="@+id/message6"
+        android:title="Estoy en la escuela"/>
+
+    <item android:id="@+id/message7"
+        android:title="Estoy con amigos"/>
+
+    <item android:id="@+id/message8"
+        android:title="Salí a caminar"/>
+
+    <item android:id="@+id/message9"
+        android:title="Batería baja"/>
+
+</menu>

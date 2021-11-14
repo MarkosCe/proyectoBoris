@@ -113,10 +113,13 @@ public class PhoneAuthActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     //EL USUARIO YA INICIO SESION CORRECTAMENTE
 
+                    //Toast.makeText(PhoneAuthActivity.this, "sii entraa", Toast.LENGTH_SHORT).show();
+
                     mUserProvider.getUser(mAuthProvider.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()){
+                                Toast.makeText(PhoneAuthActivity.this, "x2", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(PhoneAuthActivity.this, MapUserActivity.class);
                                 startActivity(intent);
                             }else{

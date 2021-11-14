@@ -10,4 +10,8 @@
         android:title="Ingresar codigo"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/emergency"
+        android:title="Emergencia"
+        app:showAsAction="never"/>
+
 </menu>
