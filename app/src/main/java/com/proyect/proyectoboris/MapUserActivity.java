@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -25,7 +24,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -33,7 +31,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -43,7 +40,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -142,7 +138,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
 
-        obtenerCodigo();
+        //obtenerCodigo();
         //Toast.makeText(this, "code:"+code, Toast.LENGTH_LONG).show();
 
         //boton del mensajee
@@ -163,20 +159,20 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.ver_codigo){
-            Intent intent = new Intent(MapUserActivity.this, CodeActivity.class);
-            intent.putExtra("codigo", code);
+        if(item.getItemId() == R.id.crear_grupo){
+            Intent intent = new Intent(MapUserActivity.this, CreateGroup.class);
+            //intent.putExtra("codigo", code);
             startActivity(intent);
-        }else if(item.getItemId() == R.id.ingresar_codigo){
+        }else if(item.getItemId() == R.id.ver_grupos){
             Intent intent = new Intent(MapUserActivity.this, EnteredCodeActivity.class);
             startActivity(intent);
-        }else if(item.getItemId() == R.id.emergency){
+        }else if(item.getItemId() == R.id.unir_grupo){
             Intent intent = new Intent(MapUserActivity.this, EmergencyActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
-
+/*
     private void obtenerCodigo(){
         mUserProvider.getUser(mAuthProvider.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -191,7 +187,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
             }
         });
-    }
+    }*/
 
     private void updateLocation(){
         if(mAuthProvider.existSession() && mCurrentLatLng != null){

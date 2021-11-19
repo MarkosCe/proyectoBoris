@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoBoris">
-        <activity android:name=".MessageActivity"></activity>
+        <activity
+            android:name=".CreateGroup"
+            android:exported="true" />
+        <activity android:name=".MessageActivity" />
         <activity android:name=".EmergencyActivity" />
         <activity android:name=".EnteredCodeActivity" />
         <activity android:name=".CodeActivity" />
