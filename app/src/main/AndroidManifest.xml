@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoBoris">
         <activity
+            android:name=".GroupView"
+            android:exported="true" />
+        <activity
             android:name=".CreateGroup"
             android:exported="true" />
         <activity android:name=".MessageActivity" />

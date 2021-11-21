@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".GroupView">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <include layout="@layout/action_bar_toolbar"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_group"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="-1dp" />
+
+                <Button
+                    android:id="@+id/btnGoGroup"
+                    android:layout_width="272dp"
+                    android:layout_height="49dp"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Famila Ramos"
+                    app:layout_constraintEnd_toStartOf="@+id/btnGroupShare"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    tools:layout_editor_absoluteY="-1dp" />
+
+                <Button
+                    android:id="@+id/btnGroupShare"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/icon_send"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
