@@ -10,18 +10,23 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
-public class CreateGroup extends AppCompatActivity {
+public class RegisterGroupActivity extends AppCompatActivity {
 
     private Button btn_crearGrupo;
 
-    TextInputEditText mTextInputName;
-    String code;
+    private GroupProvider mGroupProvider;
+    private AuthProvider mAuthProvider;
+    private UserProvider mUserProvider;
+
+    private TextInputEditText mTextInputName;
+    private String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,10 @@ public class CreateGroup extends AppCompatActivity {
         //tomamos una referencia del botón
         btn_crearGrupo = findViewById(R.id.btnCreateGroup);
         mTextInputName = findViewById(R.id.textInputName);
+        mUserProvider = new UserProvider();
+        mAuthProvider = new AuthProvider();
+
+        mGroupProvider = new GroupProvider();
 
         btn_crearGrupo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,19 +54,37 @@ public class CreateGroup extends AppCompatActivity {
         code = generateCode();
 
         if(!name.isEmpty()){
-            User user = new User();
-           // user.setId(mAuthProvider.getId());
-            user.setName(name);
-            //user.setEmail(email);
-            user.setCode(code);
+            Group grupo = new Group();
+            grupo.setCode(code);
+            grupo.setName(name);
+
+            String idU = mAuthProvider.getId();
+            mGroupProvider.create(idU, grupo);
 
             //update(user);
 
-            Group group = new Group();
+            //Group group = new Group();
             //group.setId();
         }else{
-            Toast.makeText(this, "Ingrese un nobre para el grupo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingrese un nombre para el grupo", Toast.LENGTH_SHORT).show();
         }
+
+
+        /*final String name = mTextInputName.getText().toString();
+        final String email = mTextInputEmail.getText().toString();
+        code = generateCode();
+
+        if(!name.isEmpty() && !email.isEmpty()){
+            User user = new User();
+            user.setId(mAuthProvider.getId());
+            user.setName(name);
+            user.setEmail(email);
+            user.setCode(code);
+
+            update(user);
+        }else{
+            Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
+        }*/
     }
 
     private String generateCode(){

@@ -15,8 +15,12 @@ public class GroupProvider {
         mDataBase = FirebaseDatabase.getInstance().getReference().child("Group");
     }
 
-    public Task<Void> create(Group group){
-        return mDataBase.child(group.getId()).setValue(group);
+    public String getIdGroup(){
+        return mDataBase.push().getKey();
+    }
+
+    public Task<Void> create(String id, Group group){
+        return mDataBase.child(id).child(getIdGroup()).setValue(group);
     }
 
     public DatabaseReference getGroup(String idGroup){

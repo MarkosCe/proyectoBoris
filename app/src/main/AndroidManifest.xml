@@ -16,7 +16,7 @@
             android:name=".GroupView"
             android:exported="true" />
         <activity
-            android:name=".CreateGroup"
+            android:name=".RegisterGroupActivity"
             android:exported="true" />
         <activity android:name=".MessageActivity" />
         <activity android:name=".EmergencyActivity" />
