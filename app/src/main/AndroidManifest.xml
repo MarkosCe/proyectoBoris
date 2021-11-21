@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoBoris">
         <activity
-            android:name=".GroupView"
+            android:name=".GroupViewActivity"
             android:exported="true" />
         <activity
             android:name=".RegisterGroupActivity"
