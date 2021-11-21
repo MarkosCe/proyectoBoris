@@ -53,11 +53,14 @@ public class RegisterGroupActivity extends AppCompatActivity {
         code = generateCode();
 
         if(!name.isEmpty()){
+            String idU = mAuthProvider.getId();
+            String idGrupo = mGroupProvider.getIdGroup();
+
             Group grupo = new Group();
+            grupo.setId(idGrupo);
             grupo.setCode(code);
             grupo.setName(name);
 
-            String idU = mAuthProvider.getId();
             mGroupProvider.create(idU, grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

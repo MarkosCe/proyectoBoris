@@ -24,7 +24,7 @@ public class GroupProvider {
     }
 
     public DatabaseReference getGroup(String idGroup){
-        return mDataBase.child(idGroup);
+        return mDataBase;
     }
 
     public Task<Void> update(Group group){
