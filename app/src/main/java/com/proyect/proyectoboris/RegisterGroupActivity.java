@@ -54,10 +54,9 @@ public class RegisterGroupActivity extends AppCompatActivity {
 
         if(!name.isEmpty()){
             String idU = mAuthProvider.getId();
-            String idGrupo = mGroupProvider.getIdGroup();
+
 
             Group grupo = new Group();
-            grupo.setId(idGrupo);
             grupo.setCode(code);
             grupo.setName(name);
 
@@ -65,7 +64,8 @@ public class RegisterGroupActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()) {
-                        Intent intent = new Intent(RegisterGroupActivity.this, GroupViewActivity.class);
+                        Intent intent = new Intent(RegisterGroupActivity.this, CodeActivity.class);
+                        intent.putExtra("codigo", code);
                         startActivity(intent);
                     } else {
                         Toast.makeText(RegisterGroupActivity.this, "Ingrese un nombre para el grupo", Toast.LENGTH_SHORT).show();
@@ -73,32 +73,10 @@ public class RegisterGroupActivity extends AppCompatActivity {
                 }
             });
 
-
-
-            //update(user);
-
-            //Group group = new Group();
-            //group.setId();
         }else{
             Toast.makeText(RegisterGroupActivity.this, "Ingrese un nombre para el grupo", Toast.LENGTH_SHORT).show();
         }
 
-
-        /*final String name = mTextInputName.getText().toString();
-        final String email = mTextInputEmail.getText().toString();
-        code = generateCode();
-
-        if(!name.isEmpty() && !email.isEmpty()){
-            User user = new User();
-            user.setId(mAuthProvider.getId());
-            user.setName(name);
-            user.setEmail(email);
-            user.setCode(code);
-
-            update(user);
-        }else{
-            Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
-        }*/
     }
 
     private String generateCode(){
