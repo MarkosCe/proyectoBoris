@@ -66,7 +66,7 @@ public class RegisterGroupActivity extends AppCompatActivity {
                         intent.putExtra("codigo", code);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(RegisterGroupActivity.this, "Ingrese un nombre para el grupo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterGroupActivity.this, "No es posible crear el grupo", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

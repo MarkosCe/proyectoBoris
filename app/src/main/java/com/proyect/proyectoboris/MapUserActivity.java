@@ -161,10 +161,10 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             //intent.putExtra("codigo", code);
             startActivity(intent);
         }else if(item.getItemId() == R.id.ver_grupos){
-            Intent intent = new Intent(MapUserActivity.this, EnteredCodeActivity.class);
+            Intent intent = new Intent(MapUserActivity.this, GroupViewActivity.class);
             startActivity(intent);
         }else if(item.getItemId() == R.id.unir_grupo){
-            Intent intent = new Intent(MapUserActivity.this, EmergencyActivity.class);
+            Intent intent = new Intent(MapUserActivity.this, EnteredCodeActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
