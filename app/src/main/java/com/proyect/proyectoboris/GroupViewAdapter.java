@@ -38,7 +38,7 @@ public class GroupViewAdapter extends FirebaseRecyclerAdapter<Group, GroupViewAd
 
         public ViewHolder(View view){
             super(view);
-            textViewNameGroup.findViewById(R.id.textViewNameGroup);
+            textViewNameGroup = view.findViewById(R.id.textViewNameGroup);
         }
     }
 }
