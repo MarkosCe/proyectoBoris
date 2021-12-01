@@ -20,6 +20,7 @@ public class RegisterGroupActivity extends AppCompatActivity {
 
     private Button btn_crearGrupo;
 
+    private Group grupo;
     private GroupProvider mGroupProvider;
     private AuthProvider mAuthProvider;
     private UserProvider mUserProvider;
@@ -55,10 +56,7 @@ public class RegisterGroupActivity extends AppCompatActivity {
         if(!name.isEmpty()){
             String idU = mAuthProvider.getId();
 
-
-            Group grupo = new Group();
-            grupo.setCode(code);
-            grupo.setName(name);
+            grupo = new Group(mGroupProvider.getIdGroup(), name, "url", code);
 
             mGroupProvider.create(idU, grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

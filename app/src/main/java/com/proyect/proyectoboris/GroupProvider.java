@@ -9,18 +9,26 @@ import java.util.Map;
 
 public class GroupProvider {
 
-    DatabaseReference mDataBase;
+    private DatabaseReference mDataBase;
 
     public GroupProvider(){
         mDataBase = FirebaseDatabase.getInstance().getReference().child("Group");
     }
 
-    public String getIdGroup(){
+    /*public String getIdGroup(){
         return mDataBase.push().getKey();
+    }*/
+
+    /*public Task<Void> create(String iduser, Group group){
+        return mDataBase.child(iduser).child(code).setValue(group);
+    }*/
+
+    public Task<Void> create(String idUser, Group group){
+        return mDataBase.child(idUser).child(group.getId()).setValue(group);
     }
 
-    public Task<Void> create(String id, Group group){
-        return mDataBase.child(id).child(getIdGroup()).setValue(group);
+    public String getIdGroup(){
+        return mDataBase.push().getKey();
     }
 
     public DatabaseReference getGroup(String idGroup){
