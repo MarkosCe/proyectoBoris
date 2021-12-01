@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Group {
 
     String id;
+    String idUser;
     String name;
     String image;
     String code;
@@ -14,8 +15,9 @@ public class Group {
         this.codes = new ArrayList<>();
     }
 
-    public Group(String id, String name, String image, String code) {
+    public Group(String id, String idUser, String name, String image, String code) {
         this.id = id;
+        this.idUser = idUser;
         this.name = name;
         this.image = image;
         this.code = code;
@@ -28,6 +30,14 @@ public class Group {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getName() {

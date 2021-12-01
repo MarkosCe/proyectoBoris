@@ -56,7 +56,7 @@ public class RegisterGroupActivity extends AppCompatActivity {
         if(!name.isEmpty()){
             String idU = mAuthProvider.getId();
 
-            grupo = new Group(mGroupProvider.getIdGroup(), name, "url", code);
+            grupo = new Group(mGroupProvider.getIdGroup(), idU, name, "url", code);
 
             mGroupProvider.create(idU, grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
