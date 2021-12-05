@@ -3,6 +3,7 @@ package com.proyect.proyectoboris;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ public class EnteredCodeActivity extends AppCompatActivity {
     private Group group;
 
     private Boolean exist = false;
+    private String codigo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +46,15 @@ public class EnteredCodeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 unirme();
+                Intent intent = new Intent(EnteredCodeActivity.this, MapUserActivity.class);
+                startActivity(intent);
             }
         });
 
     }
 
     public void unirme() {
-        String codigo = mPinView.getText().toString();
+        codigo = mPinView.getText().toString();
         if(!codigo.isEmpty()) {
             groupProvider.getGroup().addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -58,7 +62,7 @@ public class EnteredCodeActivity extends AppCompatActivity {
                     if(snapshot.exists()) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             Group groupS = dataSnapshot.getValue(Group.class);
-                            if (codigo.equals(group.getCode())) {
+                            if (codigo.equals(groupS.code)) {
                                 exist = true;
                                 group = groupS;
                                 groupProvider.updateMembers(group, mAuthProvider.getId());
@@ -78,7 +82,8 @@ public class EnteredCodeActivity extends AppCompatActivity {
 
                 }
             });
-
+        }else{
+            Toast.makeText(this, "Ingrese un codigo", Toast.LENGTH_SHORT).show();
         }
     }
 }
