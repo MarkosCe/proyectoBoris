@@ -23,15 +23,15 @@ public class GroupProvider {
         return mDataBase.child(iduser).child(code).setValue(group);
     }*/
 
-    public Task<Void> create(String idUser, Group group){
-        return mDataBase.child(idUser).child(group.getId()).setValue(group);
+    public Task<Void> create(Group group){
+        return mDataBase.child(group.getId()).setValue(group);
     }
 
     public String getIdGroup(){
         return mDataBase.push().getKey();
     }
 
-    public DatabaseReference getGroup(String idGroup){
+    public DatabaseReference getGroup(){
         return mDataBase;
     }
 
@@ -40,6 +40,13 @@ public class GroupProvider {
         map.put("name", group.getName());
         map.put("image", group.getImage());
         map.put("code", group.getCode());
+        return mDataBase.child(group.getId()).updateChildren(map);
+    }
+
+    public Task<Void> updateMembers(Group group, String uid){
+        Map<String, Object> map = new HashMap<>();
+        map.put("members/"+uid, true);
+
         return mDataBase.child(group.getId()).updateChildren(map);
     }
 }

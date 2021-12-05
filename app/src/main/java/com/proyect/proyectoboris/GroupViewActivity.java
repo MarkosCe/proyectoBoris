@@ -36,7 +36,6 @@ public class GroupViewActivity extends AppCompatActivity {
 
         Query query = FirebaseDatabase.getInstance().getReference()
                                         .child("Group")
-                                        .child(mAuthProvider.getId())
                                         .orderByChild("idUser")
                                         .equalTo(mAuthProvider.getId());
 

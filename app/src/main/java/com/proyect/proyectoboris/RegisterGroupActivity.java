@@ -58,7 +58,7 @@ public class RegisterGroupActivity extends AppCompatActivity {
 
             grupo = new Group(mGroupProvider.getIdGroup(), idU, name, "url", code);
 
-            mGroupProvider.create(idU, grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            mGroupProvider.create(grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()) {

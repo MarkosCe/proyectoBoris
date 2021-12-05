@@ -1,6 +1,8 @@
 package com.proyect.proyectoboris;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Group {
 
@@ -9,11 +11,9 @@ public class Group {
     String name;
     String image;
     String code;
-    ArrayList<String> codes;
+    Map<String, Boolean> members;
 
-    public Group(){
-        this.codes = new ArrayList<>();
-    }
+    public Group(){ }
 
     public Group(String id, String idUser, String name, String image, String code) {
         this.id = id;
@@ -21,7 +21,7 @@ public class Group {
         this.name = name;
         this.image = image;
         this.code = code;
-        this.codes = new ArrayList<>();
+        this.members = new HashMap<>();
     }
 
     public String getId() {
@@ -64,11 +64,11 @@ public class Group {
         this.code = code;
     }
 
-    public ArrayList getCodeUser() {
-        return codes;
+    public Map<String, Boolean> getMembers() {
+        return members;
     }
 
-    public void setCodeUser(String codeUser) {
-        this.codes.add(codeUser);
+    public void setMembers(Map<String, Boolean> members) {
+        this.members = members;
     }
 }
