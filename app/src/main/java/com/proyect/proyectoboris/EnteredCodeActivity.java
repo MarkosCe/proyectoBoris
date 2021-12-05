@@ -46,8 +46,6 @@ public class EnteredCodeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 unirme();
-                Intent intent = new Intent(EnteredCodeActivity.this, MapUserActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -71,6 +69,9 @@ public class EnteredCodeActivity extends AppCompatActivity {
                         }
                         if (!exist) {
                             Toast.makeText(EnteredCodeActivity.this, "No existe el grupo", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Intent intent = new Intent(EnteredCodeActivity.this, GroupViewActivity.class);
+                            startActivity(intent);
                         }
                     }else{
                         Toast.makeText(EnteredCodeActivity.this, "No hay grupos", Toast.LENGTH_SHORT).show();
