@@ -27,6 +27,7 @@ public class EnteredCodeActivity extends AppCompatActivity {
 
     private Boolean exist = false;
     private String codigo = "";
+    private String codigoEncontrado = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class EnteredCodeActivity extends AppCompatActivity {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             Group groupS = dataSnapshot.getValue(Group.class);
                             if (codigo.equals(groupS.code)) {
+                                codigo = groupS.code;
                                 exist = true;
                                 group = groupS;
                                 groupProvider.updateMembers(group, mAuthProvider.getId());
@@ -72,6 +74,8 @@ public class EnteredCodeActivity extends AppCompatActivity {
                             Toast.makeText(EnteredCodeActivity.this, "No existe el grupo", Toast.LENGTH_SHORT).show();
                         }else{
                             Intent intent = new Intent(EnteredCodeActivity.this, GroupViewActivity.class);
+                            intent.putExtra("codigo", codigo);
+                            intent.putExtra("flag", 1);
                             startActivity(intent);
                         }
                     }else{
