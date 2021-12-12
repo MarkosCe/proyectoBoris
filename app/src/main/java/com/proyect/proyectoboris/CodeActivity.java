@@ -30,6 +30,7 @@ public class CodeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CodeActivity.this, GroupViewActivity.class);
+                intent.putExtra("codigo", code);
                 startActivity(intent);
             }
         });

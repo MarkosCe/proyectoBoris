@@ -33,7 +33,7 @@ public class GroupViewActivity extends AppCompatActivity {
 
         Bundle extras = this.getIntent().getExtras();
         if(extras != null){
-            flag = extras.getInt("flag");
+            //flag = extras.getInt("flag");
             code = extras.getString("codigo");
         }
 
@@ -47,7 +47,7 @@ public class GroupViewActivity extends AppCompatActivity {
 
         mAuthProvider = new AuthProvider();
 
-        Query query = null;
+        /*Query query = null;
 
         if(flag == 0){
             query = FirebaseDatabase.getInstance().getReference()
@@ -59,14 +59,14 @@ public class GroupViewActivity extends AppCompatActivity {
                     .child("Group")
                     .orderByChild("code")
                     .equalTo(code);
-        }
+        }*/
 
         //Query query1 = FirebaseDatabase.getInstance().getReference()
 
-        /*Query query = FirebaseDatabase.getInstance().getReference()
+        Query query = FirebaseDatabase.getInstance().getReference()
                                         .child("Group")
-                                        .orderByChild("members")
-                                        .equalTo("true", mAuthProvider.getId());*/
+                                        .orderByChild("code")
+                                        .equalTo(code);
 
         FirebaseRecyclerOptions<Group> options = new FirebaseRecyclerOptions.Builder<Group>()
                 .setQuery(query, Group.class)
