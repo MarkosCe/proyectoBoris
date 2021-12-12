@@ -22,7 +22,7 @@ public class Group {
         this.image = image;
         this.code = code;
         members = new HashMap<>();
-        members.put(id, idUser);
+        members.put(idUser, "true");
     }
 
     public String getId() {

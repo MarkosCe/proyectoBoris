@@ -65,8 +65,8 @@ public class GroupViewActivity extends AppCompatActivity {
 
         Query query = FirebaseDatabase.getInstance().getReference()
                                         .child("Group")
-                                        .orderByChild("members/id")
-                                        .equalTo(mAuthProvider.getId());
+                                        .orderByChild("members/"+mAuthProvider.getId())
+                                        .equalTo("true");
 
         FirebaseRecyclerOptions<Group> options = new FirebaseRecyclerOptions.Builder<Group>()
                 .setQuery(query, Group.class)
