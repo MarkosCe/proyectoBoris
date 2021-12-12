@@ -26,7 +26,7 @@ public class GeofireProvider {
     }
 
     public GeoQuery getActiveUsers(LatLng latLng){
-        GeoQuery geoQuery = mGeofire.queryAtLocation(new GeoLocation(latLng.latitude, latLng.longitude),5);
+        GeoQuery geoQuery = mGeofire.queryAtLocation(new GeoLocation(latLng.latitude, latLng.longitude),300);
         geoQuery.removeAllListeners();
         return geoQuery;
     }

@@ -45,7 +45,8 @@ public class GroupProvider {
 
     public Task<Void> updateMembers(Group group, String uid){
         Map<String, Object> map = new HashMap<>();
-        map.put("members/"+uid, true);
+        map.put("members/id", uid);
+        //map.put("members/"+uid+"/", true);
 
         return mDataBase.child(group.getId()).updateChildren(map);
     }
