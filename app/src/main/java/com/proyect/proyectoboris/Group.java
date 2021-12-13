@@ -11,7 +11,7 @@ public class Group {
     String name;
     String image;
     String code;
-    Map<String, String> members;
+    Map<String, Boolean> members;
 
     public Group(){ }
 
@@ -22,7 +22,7 @@ public class Group {
         this.image = image;
         this.code = code;
         members = new HashMap<>();
-        members.put(idUser, "true");
+        members.put(idUser, true);
     }
 
     public String getId() {
@@ -65,11 +65,11 @@ public class Group {
         this.code = code;
     }
 
-    public Map<String, String> getMembers() {
+    public Map<String, Boolean> getMembers() {
         return members;
     }
 
-    public void setMembers(Map<String, String> members) {
+    public void setMembers(Map<String, Boolean> members) {
         this.members = members;
     }
 }
