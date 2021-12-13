@@ -25,6 +25,7 @@ public class GroupViewAdapter extends FirebaseRecyclerAdapter<Group, GroupViewAd
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Group model) {
 
         holder.textViewNameGroup.setText(model.getName());
+        holder.codigo = model.getCode();
 
     }
 
@@ -40,6 +41,8 @@ public class GroupViewAdapter extends FirebaseRecyclerAdapter<Group, GroupViewAd
         private TextView textViewNameGroup;
         private ImageButton btnViewCode;
 
+        private String codigo = "";
+
         public ViewHolder(View view){
             super(view);
             textViewNameGroup = view.findViewById(R.id.textViewNameGroup);
@@ -49,6 +52,7 @@ public class GroupViewAdapter extends FirebaseRecyclerAdapter<Group, GroupViewAd
                 public void onClick(View v) {
                     Context context = v.getContext();
                     Intent intent = new Intent(context,CodeActivity.class);
+                    intent.putExtra("codigo", codigo);
                     context.startActivity(intent);
                 }
             });
