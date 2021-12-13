@@ -1,8 +1,11 @@
 package com.proyect.proyectoboris;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,10 +38,20 @@ public class GroupViewAdapter extends FirebaseRecyclerAdapter<Group, GroupViewAd
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textViewNameGroup;
+        private ImageButton btnViewCode;
 
         public ViewHolder(View view){
             super(view);
             textViewNameGroup = view.findViewById(R.id.textViewNameGroup);
+            btnViewCode = view.findViewById(R.id.buttonViewCode);
+            btnViewCode.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context,CodeActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
