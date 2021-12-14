@@ -106,7 +106,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                         getActiveUsers();
                     }
 
-                    updateLocation();
+                    //updateLocation();
 
                 }
             }
@@ -226,7 +226,6 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                         //key se obtiene cuando se conecta un nuevo usuario
                         if(marker.getTag().equals(key)){
                             marker.setPosition(new LatLng(location.latitude,location.longitude));
-                            return;
                         }
                     }
                 }
