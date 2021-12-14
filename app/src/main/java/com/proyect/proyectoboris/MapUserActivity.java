@@ -208,9 +208,9 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                 }
 
                 LatLng userLatLng = new LatLng(location.latitude, location.longitude);
-                //Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title("Usuario 1").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
-                //marker.setTag(key);
-                //mUsersMarkers.add(marker);
+                Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title("Usuario 1").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
+                marker.setTag(key);
+                mUsersMarkers.add(marker);
             }
 
             @Override
