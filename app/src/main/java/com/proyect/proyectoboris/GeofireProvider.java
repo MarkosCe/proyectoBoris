@@ -17,8 +17,8 @@ public class GeofireProvider {
         mGeofire = new GeoFire(mDatabase);
     }
 
-    public void saveLocation(String idDriver, LatLng latLng){
-        mGeofire.setLocation(idDriver, new GeoLocation(latLng.latitude, latLng.longitude));
+    public void saveLocation(String idUser, LatLng latLng){
+        mGeofire.setLocation(idUser, new GeoLocation(latLng.latitude, latLng.longitude));
     }
 
     public void removeLocation(String idDriver){

@@ -97,7 +97,6 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                     mMap.moveCamera(CameraUpdateFactory.newCameraPosition(
                             new CameraPosition.Builder()
                                     .target(new LatLng(location.getLatitude(), location.getLongitude()))
-                                    .zoom(15f)
                                     .build()
                     ));
 
@@ -106,7 +105,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                         getActiveUsers();
                     }
 
-                    //updateLocation();
+                    updateLocation();
 
                 }
             }
@@ -126,7 +125,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         mUserProvider = new UserProvider();
         mGeofireProvider = new GeofireProvider();
         //firebaseAuth = FirebaseAuth.getInstance();
-        name = mUserProvider.getUser(mAuthProvider.getId()).child("name").getKey();
+        //name = mUserProvider.getUser(mAuthProvider.getId()).child("name").getKey();
 
        //code = getIntent().getStringExtra("codigo");
 
@@ -197,20 +196,22 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 //AÑADIR LOS MARCADORES DE LOS USUARIOS ACTIVOS
-                for(Marker marker:mUsersMarkers){
-                    if(marker.getTag() != null){
-                        //key se obtiene cuando se conecta un nuevo usuario
-                        if(marker.getTag().equals(key)){
-                            //esto se hace para que no se vuelva a añadir el marcador
-                            return;
+                if(!(key.equals(mAuthProvider.getId()))) {
+                    for (Marker marker : mUsersMarkers) {
+                        if (marker.getTag() != null) {
+                            //key se obtiene cuando se conecta un nuevo usuario
+                            if (marker.getTag().equals(key)) {
+                                //esto se hace para que no se vuelva a añadir el marcador
+                                return;
+                            }
                         }
                     }
-                }
 
-                LatLng userLatLng = new LatLng(location.latitude, location.longitude);
-                Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title("Usuario 1").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
-                marker.setTag(key);
-                mUsersMarkers.add(marker);
+                    LatLng userLatLng = new LatLng(location.latitude, location.longitude);
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title("Usuario 1").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
+                    marker.setTag(key);
+                    mUsersMarkers.add(marker);
+                }
             }
 
             @Override
