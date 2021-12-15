@@ -97,6 +97,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                     mMap.moveCamera(CameraUpdateFactory.newCameraPosition(
                             new CameraPosition.Builder()
                                     .target(new LatLng(location.getLatitude(), location.getLongitude()))
+                                    .zoom(15f)
                                     .build()
                     ));
 
