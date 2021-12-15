@@ -223,11 +223,13 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
                 //actualizar la posicion de cada usuarioo, este metodo se ejecuta cuando cambia la posicion del usuario
-                for(Marker marker:mUsersMarkers){
-                    if(marker.getTag() != null){
-                        //key se obtiene cuando se conecta un nuevo usuario
-                        if(marker.getTag().equals(key)){
-                            marker.setPosition(new LatLng(location.latitude,location.longitude));
+                if(!(key.equals(mAuthProvider.getId()))) {
+                    for (Marker marker : mUsersMarkers) {
+                        if (marker.getTag() != null) {
+                            //key se obtiene cuando se conecta un nuevo usuario
+                            if (marker.getTag().equals(key)) {
+                                marker.setPosition(new LatLng(location.latitude, location.longitude));
+                            }
                         }
                     }
                 }
