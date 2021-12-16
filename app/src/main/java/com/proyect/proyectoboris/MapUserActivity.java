@@ -71,7 +71,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
     private boolean mIsFirstTime = true;
 
-    String code;
+    private String keyId;
 
     //se ejecuta cada vez que el usuario se mueva
     private LocationCallback mlocationCallback = new LocationCallback() {
@@ -101,12 +101,12 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                                     .build()
                     ));
 
+                    updateLocation();
+
                     if(mIsFirstTime){
                         mIsFirstTime = false;
                         getActiveUsers();
                     }
-
-                    updateLocation();
 
                 }
             }
@@ -127,6 +127,8 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         mGeofireProvider = new GeofireProvider();
         //firebaseAuth = FirebaseAuth.getInstance();
         //name = mUserProvider.getUser(mAuthProvider.getId()).child("name").getKey();
+
+        keyId = mAuthProvider.getId();
 
        //code = getIntent().getStringExtra("codigo");
 
@@ -197,7 +199,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 //AÑADIR LOS MARCADORES DE LOS USUARIOS ACTIVOS
-                if(!(key.equals(mAuthProvider.getId()))) {
+                if(!(key.equals(keyId))) {
                     for (Marker marker : mUsersMarkers) {
                         if (marker.getTag() != null) {
                             //key se obtiene cuando se conecta un nuevo usuario
@@ -223,7 +225,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
                 //actualizar la posicion de cada usuarioo, este metodo se ejecuta cuando cambia la posicion del usuario
-                if(!(key.equals(mAuthProvider.getId()))) {
+                if(!(key.equals(keyId))) {
                     for (Marker marker : mUsersMarkers) {
                         if (marker.getTag() != null) {
                             //key se obtiene cuando se conecta un nuevo usuario
