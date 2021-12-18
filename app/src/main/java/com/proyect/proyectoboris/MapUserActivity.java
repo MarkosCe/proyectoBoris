@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,7 +74,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
     private String keyId;
 
-    private ArrayList<String> members = null;
+    private ArrayList<String> members;
 
     //se ejecuta cada vez que el usuario se mueva
     private LocationCallback mlocationCallback = new LocationCallback() {
@@ -139,11 +140,13 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
 
+        members = new ArrayList<String>();
         Bundle extras = this.getIntent().getExtras();
         if(extras != null){
             //flag = extras.getInt("flag");
             mIsFirstTime = true;
             members = extras.getStringArrayList("members");
+            Log.i("mapi",members.get(0));
         }
 
         //obtenerCodigo();
@@ -210,6 +213,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                 //AÑADIR LOS MARCADORES DE LOS USUARIOS ACTIVOS
                 if(!(key.equals(keyId))) {
                     if (members != null && members.contains(key)) {
+                        Log.i("key",key);
                         for (Marker marker : mUsersMarkers) {
                             if (marker.getTag() != null) {
                                 //key se obtiene cuando se conecta un nuevo usuario
@@ -238,6 +242,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                 //actualizar la posicion de cada usuarioo, este metodo se ejecuta cuando cambia la posicion del usuario
                 if(!(key.equals(keyId))) {
                     if (members != null && members.contains(key)) {
+                        Log.i("keydos",key);
                         for (Marker marker : mUsersMarkers) {
                             if (marker.getTag() != null) {
                                 //key se obtiene cuando se conecta un nuevo usuario

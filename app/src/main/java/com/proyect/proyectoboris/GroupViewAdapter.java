@@ -2,6 +2,7 @@ package com.proyect.proyectoboris;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,7 @@ public class GroupViewAdapter extends FirebaseRecyclerAdapter<Group, GroupViewAd
                     Group group = snapshot.getValue(Group.class);
                     assert group != null;
                     array = new ArrayList<>(group.getMembers().keySet());
+                    Log.i("array",array.get(0));
                 }
             }
 
