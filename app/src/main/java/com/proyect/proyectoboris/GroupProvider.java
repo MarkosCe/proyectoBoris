@@ -35,6 +35,8 @@ public class GroupProvider {
         return mDataBase;
     }
 
+    public DatabaseReference getGroupId(String id){ return mDataBase.child(id);}
+
     public Task<Void> update(Group group){
         Map<String, Object> map = new HashMap<>();
         map.put("name", group.getName());

@@ -73,6 +73,8 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
     private String keyId;
 
+    private ArrayList<String> members = null;
+
     //se ejecuta cada vez que el usuario se mueva
     private LocationCallback mlocationCallback = new LocationCallback() {
         @Override
@@ -137,6 +139,13 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
 
+        Bundle extras = this.getIntent().getExtras();
+        if(extras != null){
+            //flag = extras.getInt("flag");
+            mIsFirstTime = true;
+            members = extras.getStringArrayList("members");
+        }
+
         //obtenerCodigo();
         //Toast.makeText(this, "code:"+code, Toast.LENGTH_LONG).show();
 
@@ -200,20 +209,22 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             public void onKeyEntered(String key, GeoLocation location) {
                 //AÑADIR LOS MARCADORES DE LOS USUARIOS ACTIVOS
                 if(!(key.equals(keyId))) {
-                    for (Marker marker : mUsersMarkers) {
-                        if (marker.getTag() != null) {
-                            //key se obtiene cuando se conecta un nuevo usuario
-                            if (marker.getTag().equals(key)) {
-                                //esto se hace para que no se vuelva a añadir el marcador
-                                return;
+                    if (members != null && members.contains(key)) {
+                        for (Marker marker : mUsersMarkers) {
+                            if (marker.getTag() != null) {
+                                //key se obtiene cuando se conecta un nuevo usuario
+                                if (marker.getTag().equals(key)) {
+                                    //esto se hace para que no se vuelva a añadir el marcador
+                                    return;
+                                }
                             }
                         }
-                    }
 
-                    LatLng userLatLng = new LatLng(location.latitude, location.longitude);
-                    Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title("Usuario 1").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
-                    marker.setTag(key);
-                    mUsersMarkers.add(marker);
+                        LatLng userLatLng = new LatLng(location.latitude, location.longitude);
+                        Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title("Usuario 1").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
+                        marker.setTag(key);
+                        mUsersMarkers.add(marker);
+                    }
                 }
             }
 
@@ -226,11 +237,13 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             public void onKeyMoved(String key, GeoLocation location) {
                 //actualizar la posicion de cada usuarioo, este metodo se ejecuta cuando cambia la posicion del usuario
                 if(!(key.equals(keyId))) {
-                    for (Marker marker : mUsersMarkers) {
-                        if (marker.getTag() != null) {
-                            //key se obtiene cuando se conecta un nuevo usuario
-                            if (marker.getTag().equals(key)) {
-                                marker.setPosition(new LatLng(location.latitude, location.longitude));
+                    if (members != null && members.contains(key)) {
+                        for (Marker marker : mUsersMarkers) {
+                            if (marker.getTag() != null) {
+                                //key se obtiene cuando se conecta un nuevo usuario
+                                if (marker.getTag().equals(key)) {
+                                    marker.setPosition(new LatLng(location.latitude, location.longitude));
+                                }
                             }
                         }
                     }
