@@ -138,6 +138,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         MyToolbar.show(this, "Mapa", false);
 
         mImageButtonMessage = findViewById(R.id.imageButtonMessage);
+        mImageButtonMessage.setVisibility(View.INVISIBLE);
 
         mAuthProvider = new AuthProvider();
         mUserProvider = new UserProvider();
@@ -162,6 +163,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             //flag = true;
             String idE = extras.getString("idgrupo");
             getMembers(idE);
+            mImageButtonMessage.setVisibility(View.VISIBLE);
             if(members != null){
                 Log.i("flaggg", "aaaaaaaaa");
             }
