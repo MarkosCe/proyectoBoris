@@ -42,6 +42,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,6 +55,7 @@ import java.util.List;
 public class MapUserActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private ImageButton mImageButtonMessage;
+    private FloatingActionButton mButtonMessage;
 
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
@@ -137,8 +139,11 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
         MyToolbar.show(this, "Mapa", false);
 
-        mImageButtonMessage = findViewById(R.id.imageButtonMessage);
-        mImageButtonMessage.setVisibility(View.INVISIBLE);
+        mButtonMessage = findViewById(R.id.floatingButtonMessage);
+        mButtonMessage.setVisibility(View.GONE);
+
+        //mImageButtonMessage = findViewById(R.id.imageButtonMessage);
+        //mImageButtonMessage.setVisibility(View.GONE);
 
         mAuthProvider = new AuthProvider();
         mUserProvider = new UserProvider();
@@ -163,7 +168,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             //flag = true;
             String idE = extras.getString("idgrupo");
             getMembers(idE);
-            mImageButtonMessage.setVisibility(View.VISIBLE);
+            mButtonMessage.setVisibility(View.VISIBLE);
             if(members != null){
                 Log.i("flaggg", "aaaaaaaaa");
             }
@@ -175,7 +180,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         //Toast.makeText(this, "code:"+code, Toast.LENGTH_LONG).show();
 
         //boton del mensajee
-        mImageButtonMessage.setOnClickListener(new View.OnClickListener() {
+        mButtonMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MapUserActivity.this, MessageActivity.class);

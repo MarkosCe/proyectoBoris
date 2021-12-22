@@ -18,22 +18,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="right"
+        android:gravity="end"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <ImageButton
-            android:id="@+id/imageButtonMessage"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:background="@drawable/circle_button2"
-            android:backgroundTint="@color/pink"
-            android:src="@drawable/icon_message"
-            android:tint="@color/white"
-            android:layout_alignParentBottom="true"
-            android:contentDescription="mensaje"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="130dp"/>
-
     </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingButtonMessage"
+        android:contentDescription="message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/icon_message"
+        app:maxImageSize="35dp"
+        android:backgroundTint="@color/pink"
+        android:tint="@color/white"
+        android:layout_marginVertical="130dp"
+        android:layout_marginEnd="10dp"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

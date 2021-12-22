@@ -17,6 +17,7 @@ public class MessagesAdapter extends RecyclerView.Adapter {
 
     Context context;
     ArrayList<Messages> messagesArrayList;
+    ////fdnvhkbhvjbjhvbfjhbjhcjhb cjhbg
 
     int ITEM_SEND=1;
     int ITEM_RECIEVE=2;
