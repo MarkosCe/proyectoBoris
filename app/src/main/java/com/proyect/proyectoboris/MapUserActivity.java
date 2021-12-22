@@ -40,8 +40,12 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -58,8 +62,9 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
     private GroupProvider groupPro;
 
     //private FirebaseAuth firebaseAuth;
-    private String name = "Tu estás aquí";
-    private String nameUsers = "Name user";
+    private String name = "Tú estás aquí";
+    private String nameUsers = "User Name";
+    private String nameGroup = "Group Name";
 
     private GeofireProvider mGeofireProvider;
 
@@ -98,7 +103,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                     mMarker = mMap.addMarker(new MarkerOptions().position(
                             new LatLng(location.getLatitude(), location.getLongitude())
                             )
-                            .title("Tu estás aquí")
+                            .title("Tú estás aquí")
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_user))
                     );
                     //OBTENER LA LOCALIZACION DEL USUARIO EN TIEMPO REAL
@@ -199,6 +204,9 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                 if (snapshot.exists()){
                     Group group = snapshot.getValue(Group.class);
                     members = new ArrayList<>(group.getMembers().keySet());
+                    //recuperamos el nombre del grupo y se lo asignamos al toolbar
+                    nameGroup = snapshot.child("name").getValue().toString();
+                    MyToolbar.show(MapUserActivity.this, nameGroup, false);
                 }
             }
 
@@ -271,11 +279,13 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                             }
                         }
 
-                        getNameUser(key);
+                        getNameUser(key, location);
+                        //Log.i("nameee",nameUsers);
+                        /*
                         LatLng userLatLng = new LatLng(location.latitude, location.longitude);
                         Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title(nameUsers).icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
                         marker.setTag(key);
-                        mUsersMarkers.add(marker);
+                        mUsersMarkers.add(marker);*/
                     }
                 }
             }
@@ -316,13 +326,19 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         });
     }
 
-    private void getNameUser(String key){
-        mUserProvider.getUser(key).addValueEventListener(new ValueEventListener() {
+    private void getNameUser(String key, GeoLocation location){
+        mUserProvider.getUser(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
-                    nameUsers = user.getName();
+                    nameUsers = user.getName().toString();
+
+                    LatLng userLatLng = new LatLng(location.latitude, location.longitude);
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title(nameUsers).icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
+                    marker.setTag(key);
+                    mUsersMarkers.add(marker);
+
                     Log.i("nameee",nameUsers);
                 }
             }
@@ -433,7 +449,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
                 new AlertDialog.Builder(this)
                         .setTitle("Proporciona los permisos para continuar")
-                        .setMessage("Esta aplicaion requiere de los permisos de ubicacion")
+                        .setMessage("Esta aplicaion requiere de los permisos de ubicación")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
