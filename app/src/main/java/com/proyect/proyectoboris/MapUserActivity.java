@@ -40,7 +40,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +55,11 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
     private SupportMapFragment mMapFragment;
     private AuthProvider mAuthProvider;
     private UserProvider mUserProvider;
+    private GroupProvider groupPro;
 
     //private FirebaseAuth firebaseAuth;
     private String name = "Tu estás aquí";
+    private String nameUsers = "Name user";
 
     private GeofireProvider mGeofireProvider;
 
@@ -71,6 +75,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
     private LatLng mCurrentLatLng;
 
     private boolean mIsFirstTime = true;
+    private boolean flag = false;
 
     private String keyId;
 
@@ -106,6 +111,10 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
                     updateLocation();
 
+                    /*if(flag){
+                        getMembers();
+                    }*/
+
                     if(mIsFirstTime){
                         mIsFirstTime = false;
                         getActiveUsers();
@@ -128,6 +137,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         mAuthProvider = new AuthProvider();
         mUserProvider = new UserProvider();
         mGeofireProvider = new GeofireProvider();
+        groupPro = new GroupProvider();
         //firebaseAuth = FirebaseAuth.getInstance();
         //name = mUserProvider.getUser(mAuthProvider.getId()).child("name").getKey();
 
@@ -140,13 +150,18 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
 
-        members = new ArrayList<String>();
         Bundle extras = this.getIntent().getExtras();
         if(extras != null){
             //flag = extras.getInt("flag");
             mIsFirstTime = true;
-            members = extras.getStringArrayList("members");
-            Log.i("mapi",members.get(0));
+            //flag = true;
+            String idE = extras.getString("idgrupo");
+            getMembers(idE);
+            if(members != null){
+                Log.i("flaggg", "aaaaaaaaa");
+            }
+            //members = extras.getStringArrayList("members");
+            //Log.i("mapi",members.get(0));
         }
 
         //obtenerCodigo();
@@ -158,6 +173,38 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             public void onClick(View v) {
                 Intent intent = new Intent(MapUserActivity.this, MessageActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void getMembers(String idA){
+        //ArrayList<String> usuarios = new ArrayList<String>();
+        /*groupPro.getGroupId(idA).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    Group group = snapshot.getValue(Group.class);
+                    members = new ArrayList<>(group.getMembers().keySet());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+        groupPro.getGroupId(idA).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    Group group = snapshot.getValue(Group.class);
+                    members = new ArrayList<>(group.getMembers().keySet());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
@@ -213,7 +260,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                 //AÑADIR LOS MARCADORES DE LOS USUARIOS ACTIVOS
                 if(!(key.equals(keyId))) {
                     if (members != null && members.contains(key)) {
-                        Log.i("key",key);
+                        Log.i("keyee",key);
                         for (Marker marker : mUsersMarkers) {
                             if (marker.getTag() != null) {
                                 //key se obtiene cuando se conecta un nuevo usuario
@@ -224,8 +271,9 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                             }
                         }
 
+                        getNameUser(key);
                         LatLng userLatLng = new LatLng(location.latitude, location.longitude);
-                        Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title("Usuario 1").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
+                        Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title(nameUsers).icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
                         marker.setTag(key);
                         mUsersMarkers.add(marker);
                     }
@@ -263,6 +311,24 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
             @Override
             public void onGeoQueryError(DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getNameUser(String key){
+        mUserProvider.getUser(key).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    User user = snapshot.getValue(User.class);
+                    nameUsers = user.getName();
+                    Log.i("nameee",nameUsers);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });

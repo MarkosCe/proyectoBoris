@@ -75,7 +75,7 @@ public class GroupViewActivity extends AppCompatActivity {
         /*FirebaseRecyclerOptions<Group> options1 = new FirebaseRecyclerOptions.Builder<Group>()
                 .setQuery()*/
 
-        mAdapter = new GroupViewAdapter(options);
+        mAdapter = new GroupViewAdapter(options, GroupViewActivity.this);
 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.startListening();

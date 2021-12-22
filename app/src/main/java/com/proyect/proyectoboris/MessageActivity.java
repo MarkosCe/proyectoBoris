@@ -41,7 +41,8 @@ public class MessageActivity extends AppCompatActivity {
     private String enteredmessage;
     //Intent intent;
     String mrecievername,sendername,mrecieveruid,msenderuid;
-    private FirebaseAuth firebaseAuth;
+    //private FirebaseAuth firebaseAuth;
+    private AuthProvider authProvider;
     //FirebaseDatabase firebaseDatabase;
     String senderroom,recieverroom;
 
@@ -61,13 +62,14 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        mButtonDefaultMessage = findViewById(R.id.getmessage);
+        //mButtonDefaultMessage = findViewById(R.id.getmessage);
         msendmessagebutton = findViewById(R.id.sendMessageButton);
         mgetmessage = findViewById(R.id.getmessage);
         //mTextViewMessage = findViewById(R.id.textViewMessage);
         //MyToolbar.show(this, "Chat", false);
-        firebaseAuth=FirebaseAuth.getInstance();
-        msenderuid=firebaseAuth.getUid();
+        //firebaseAuth=FirebaseAuth.getInstance();
+        authProvider = new AuthProvider();
+        msenderuid = authProvider.getId();
         calendar=Calendar.getInstance();
         simpleDateFormat=new SimpleDateFormat("hh:mm a");
 
@@ -81,7 +83,7 @@ public class MessageActivity extends AppCompatActivity {
         mmessagerecyclerview.setAdapter(messagesAdapter);
 
 
-        mButtonDefaultMessage.setOnClickListener(new View.OnClickListener() {
+        mgetmessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //inicializar el PopupMenu
@@ -116,12 +118,12 @@ public class MessageActivity extends AppCompatActivity {
                 enteredmessage=mgetmessage.getText().toString();
                 if(enteredmessage.isEmpty())
                 {
-                    Toast.makeText(getApplicationContext(),"Enter message first",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Selecciona un mensaje",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Date date = new Date();
                     currenttime = simpleDateFormat.format(calendar.getTime());
-                    Messages messages = new Messages(enteredmessage, firebaseAuth.getUid(), date.getTime(), currenttime);
+                    Messages messages = new Messages(enteredmessage, msenderuid, date.getTime(), currenttime);
 
                     mgetmessage.setText(null);
                 }

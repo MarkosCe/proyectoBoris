@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chaos.view.PinView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -32,7 +33,8 @@ public class PhoneAuthActivity extends AppCompatActivity {
     TextView mTextViewMsgCheck;
 
     Button mButtonCodeVerification;
-    EditText mEditTextCodeVerification;
+    private PinView mPinView;
+    //EditText mEditTextCodeVerification;
 
     AuthProvider mAuthProvider;
 
@@ -47,7 +49,8 @@ public class PhoneAuthActivity extends AppCompatActivity {
         mTextViewMsgCheck = findViewById(R.id.textViewMsgCheck);
 
         mButtonCodeVerification = findViewById(R.id.btnCodeVerification);
-        mEditTextCodeVerification = findViewById(R.id.editTextCodeVerification);
+        //mEditTextCodeVerification = findViewById(R.id.editTextCodeVerification);
+        mPinView = findViewById(R.id.pinViewCodeVerification);
 
         mAuthProvider = new AuthProvider();
 
@@ -63,7 +66,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
         mButtonCodeVerification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String code = mEditTextCodeVerification.getText().toString();
+                String code = mPinView.getText().toString();
                 if(!code.equals("") && code.length() >= 6){
                     signIn(code);
                 }else{
@@ -84,7 +87,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
             String code = phoneAuthCredential.getSmsCode();
 
             if(code != null){
-                mEditTextCodeVerification.setText(code);
+                mPinView.setText(code);
                 signIn(code);
             }
 
