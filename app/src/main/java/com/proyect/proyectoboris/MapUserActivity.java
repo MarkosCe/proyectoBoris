@@ -205,7 +205,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                     Group group = snapshot.getValue(Group.class);
                     members = new ArrayList<>(group.getMembers().keySet());
                     //recuperamos el nombre del grupo y se lo asignamos al toolbar
-                    nameGroup = snapshot.child("name").getValue().toString();
+                    nameGroup = group.getName();
                     MyToolbar.show(MapUserActivity.this, nameGroup, false);
                 }
             }
@@ -332,7 +332,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
-                    nameUsers = user.getName().toString();
+                    nameUsers = user.getName();
 
                     LatLng userLatLng = new LatLng(location.latitude, location.longitude);
                     Marker marker = mMap.addMarker(new MarkerOptions().position(userLatLng).title(nameUsers).icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_location_members2)));
