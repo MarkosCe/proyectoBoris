@@ -30,6 +30,7 @@
             android:src="@drawable/icon_message"
             android:tint="@color/white"
             android:layout_alignParentBottom="true"
+            android:contentDescription="mensaje"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="130dp"/>
 
