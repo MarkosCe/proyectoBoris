@@ -55,7 +55,7 @@ import java.util.List;
 public class MapUserActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private ImageButton mImageButtonMessage;
-    private FloatingActionButton mButtonMessage;
+    private FloatingActionButton mButtonMessage, mButtonPanic;
 
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
@@ -140,7 +140,10 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
         MyToolbar.show(this, "Mapa", false);
 
         mButtonMessage = findViewById(R.id.floatingButtonMessage);
-        mButtonMessage.setVisibility(View.GONE);
+        mButtonMessage.setVisibility(View.INVISIBLE);
+        //ahora lo hacemos con el boton de pánico
+        mButtonPanic = findViewById(R.id.btnEmergencia);
+        mButtonPanic.setVisibility(View.INVISIBLE);
 
         //mImageButtonMessage = findViewById(R.id.imageButtonMessage);
         //mImageButtonMessage.setVisibility(View.GONE);
@@ -168,7 +171,9 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             //flag = true;
             String idE = extras.getString("idgrupo");
             getMembers(idE);
+            //ponemos visible los dos botones
             mButtonMessage.setVisibility(View.VISIBLE);
+            mButtonPanic.setVisibility(View.VISIBLE);
             if(members != null){
                 Log.i("flaggg", "aaaaaaaaa");
             }
@@ -184,6 +189,15 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MapUserActivity.this, MessageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Evento para el botón de panico, este es el btn que aparecerá en el mapa
+        mButtonPanic.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapUserActivity.this, EmergencyActivity.class);
                 startActivity(intent);
             }
         });

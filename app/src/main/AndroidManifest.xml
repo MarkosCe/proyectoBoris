@@ -20,7 +20,10 @@
             android:name=".RegisterGroupActivity"
             android:exported="true" />
         <activity android:name=".MessageActivity" />
-        <activity android:name=".EmergencyActivity" />
+        <activity
+            android:name=".EmergencyActivity"
+            android:parentActivityName=".MapUserActivity"
+            android:exported="true"/>
         <activity android:name=".EnteredCodeActivity" />
         <activity android:name=".CodeActivity" />
         <activity android:name=".RegisterUserActivity" />

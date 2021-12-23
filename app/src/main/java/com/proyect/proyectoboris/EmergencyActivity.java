@@ -16,7 +16,7 @@ public class EmergencyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency);
 
-        MyToolbar.show(this, "", true);
+        MyToolbar.show(this, "Botón de Pánico", true);
 
         mButtonEmergency = findViewById(R.id.emergency_button);
 
