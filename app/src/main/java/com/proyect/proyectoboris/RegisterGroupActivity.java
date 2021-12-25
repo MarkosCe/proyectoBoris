@@ -17,6 +17,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -72,6 +74,10 @@ public class RegisterGroupActivity extends AppCompatActivity {
             Random random = new Random();
             int n = random.nextInt(100000);
             grupo.setIdNotification(n);
+
+            Map<String, Boolean> map = new HashMap<>();
+            map.put(idU, true);
+            grupo.setMembers(map);
 
             ArrayList<String> ids = new ArrayList<>();
             ids.add(mAuthProvider.getId());

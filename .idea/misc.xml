@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Misael/AndroidStudioProjects/proyectoBoris/app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/Marcos.DESKTOP-2V6J82B/AndroidStudioProjects/proyectoBoris/app/src/main/res/drawable/bubble_corner_left.xml" value="0.2203125" />
+        <entry key="..\:/Users/Marcos.DESKTOP-2V6J82B/AndroidStudioProjects/proyectoBoris/app/src/main/res/drawable/bubble_corner_right.xml" value="0.2203125" />
+        <entry key="..\:/Users/Marcos.DESKTOP-2V6J82B/AndroidStudioProjects/proyectoBoris/app/src/main/res/layout/activity_map_user.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Marcos.DESKTOP-2V6J82B/AndroidStudioProjects/proyectoBoris/app/src/main/res/layout/activity_message.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Marcos.DESKTOP-2V6J82B/AndroidStudioProjects/proyectoBoris/app/src/main/res/layout/card_group.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Marcos.DESKTOP-2V6J82B/AndroidStudioProjects/proyectoBoris/app/src/main/res/layout/cardview_message.xml" value="0.25" />
         <entry key="..\:/Users/Misael/AndroidStudioProjects/proyectoBoris/app/src/main/res/drawable/rounded_button.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Misael/AndroidStudioProjects/proyectoBoris/app/src/main/res/layout/action_bar_toolbar.xml" value="0.371875" />
         <entry key="..\:/Users/Misael/AndroidStudioProjects/proyectoBoris/app/src/main/res/layout/activity_code.xml" value="0.371875" />
@@ -22,7 +27,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
