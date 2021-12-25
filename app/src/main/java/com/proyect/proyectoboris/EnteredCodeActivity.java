@@ -77,6 +77,13 @@ public class EnteredCodeActivity extends AppCompatActivity {
                         if (!exist) {
                             Toast.makeText(EnteredCodeActivity.this, "No existe el grupo", Toast.LENGTH_SHORT).show();
                         }else{
+                            String topic = group.getId();
+                            FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    //Toast.makeText(EmergencyActivity.this, "suscrito al topico", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             Intent intent = new Intent(EnteredCodeActivity.this, GroupViewActivity.class);
                             intent.putExtra("codigo", codigo);
                             intent.putExtra("flag", 1);
@@ -90,13 +97,6 @@ public class EnteredCodeActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
-            String topic = group.getId();
-            FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    //Toast.makeText(EmergencyActivity.this, "suscrito al topico", Toast.LENGTH_SHORT).show();
                 }
             });
         }else{

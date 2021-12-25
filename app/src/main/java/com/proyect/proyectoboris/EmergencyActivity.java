@@ -30,6 +30,7 @@ public class EmergencyActivity extends AppCompatActivity {
     //esto es para versiones android superiores a O (Oreo)
     private final static String CHANNEL_ID = "NOTIFICACION";
     private final static int NOTIFICACION_ID = 0;
+    private String idgrupo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class EmergencyActivity extends AppCompatActivity {
          */
 
         Bundle extras = this.getIntent().getExtras();
-        String idgrupo = extras.getString("idGrupo");
+        idgrupo = extras.getString("idGrupo");
 
         mButtonEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +65,10 @@ public class EmergencyActivity extends AppCompatActivity {
         RequestQueue myRequest = Volley.newRequestQueue(getApplicationContext());
         JSONObject json = new JSONObject();
         try {
-            json.put("to", "/topics/enviaratodos");
+            json.put("to", "/topics/"+idgrupo);
             JSONObject notificacion = new JSONObject();
             notificacion.put("titulo", "Alerta Boris");
-            notificacion.put("detalle", "Fulano necesita ayuda");
+            notificacion.put("detalle", "Alguien necesita de tu ayuda");
             json.put("data", notificacion);
             String URL = "https://fcm.googleapis.com/fcm/send";
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, json, null, null) {
