@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Random;
 
@@ -70,7 +71,13 @@ public class RegisterGroupActivity extends AppCompatActivity {
                     }
                 }
             });
-
+            String topic = grupo.getId();
+            FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    //Toast.makeText(EmergencyActivity.this, "suscrito al topico", Toast.LENGTH_SHORT).show();
+                }
+            });
         }else{
             Toast.makeText(RegisterGroupActivity.this, "Ingrese un nombre para el grupo", Toast.LENGTH_SHORT).show();
         }

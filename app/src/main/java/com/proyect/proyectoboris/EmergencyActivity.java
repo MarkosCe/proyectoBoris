@@ -39,13 +39,14 @@ public class EmergencyActivity extends AppCompatActivity {
         MyToolbar.show(this, "Botón de Pánico", true);
 
         mButtonEmergency = findViewById(R.id.emergency_button);
-
+        /**
         FirebaseMessaging.getInstance().subscribeToTopic("enviaratodos").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(EmergencyActivity.this, "suscrito al topico", Toast.LENGTH_SHORT).show();
             }
         });
+         */
 
         mButtonEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +61,6 @@ public class EmergencyActivity extends AppCompatActivity {
         RequestQueue myRequest = Volley.newRequestQueue(getApplicationContext());
         JSONObject json = new JSONObject();
         try {
-            //String token = "";
             json.put("to", "/topics/enviaratodos");
             JSONObject notificacion = new JSONObject();
             notificacion.put("titulo", "Alerta Boris");
