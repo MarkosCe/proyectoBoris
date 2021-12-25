@@ -1,23 +1,19 @@
 package com.proyect.proyectoboris;
 
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.Query;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GroupProvider {
+public class MessageProvider {
 
     private DatabaseReference mDataBase;
 
-    public GroupProvider(){
-        mDataBase = FirebaseDatabase.getInstance().getReference().child("Group");
+    public MessageProvider(){
+        mDataBase = FirebaseDatabase.getInstance().getReference().child("Messages");
     }
 
     /*public String getIdGroup(){
@@ -28,19 +24,45 @@ public class GroupProvider {
         return mDataBase.child(iduser).child(code).setValue(group);
     }*/
 
-    public Task<Void> create(Group group){
-        return mDataBase.child(group.getId()).setValue(group);
+    public Task<Void> create(Message message){
+        return mDataBase.child(message.getId()).setValue(message);
     }
 
     public String getIdGroup(){
         return mDataBase.push().getKey();
     }
 
+    public Query getMessagesByChat(String idChat){
+        Query query = mDataBase
+                .orderByChild("idChat")
+                .equalTo(idChat);
+        return query;
+    }
+
+    /*public Query getLastMessagesByChatAndSender(String idChat, String idSender) {
+        ArrayList<String> status = new ArrayList<>();
+        status.add("ENVIADO");
+        status.add("RECIBIDO");
+
+        return mCollection
+                .whereEqualTo("idChat", idChat)
+                .whereEqualTo("idSender", idSender)
+                .whereIn("status", status)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(5);
+    }*/
+
     public DatabaseReference getGroup(){
         return mDataBase;
     }
 
     public DatabaseReference getGroupId(String id){ return mDataBase.child(id);}
+
+    public Task<Void> updateStatus(String idMessage, String status) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", status);
+        return mDataBase.child(idMessage).updateChildren(map);
+    }
 
     public Task<Void> update(Group group){
         Map<String, Object> map = new HashMap<>();
@@ -58,24 +80,4 @@ public class GroupProvider {
         return mDataBase.child(group.getId()).updateChildren(map);
     }
 
-    public void updateNumberMessages(final String idChat) {
-
-        mDataBase.child(idChat).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    Group group = snapshot.getValue(Group.class);
-                    int numberMessages = group.getNumberMessages() + 1;
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("numberMessages", numberMessages);
-                    mDataBase.child(idChat).updateChildren(map);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 }

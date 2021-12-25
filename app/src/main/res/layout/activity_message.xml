@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".MessageActivity">
 
     <!--<include layout="@layout/action_bar_toolbar"/>-->
@@ -64,44 +63,44 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/getmessage"
-            android:id="@+id/recyclerviewofspecific"
-            android:layout_below="@id/toolbarChat"
-            android:padding="5dp">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/getmessage"
+        android:id="@+id/recyclerviewofspecific"
+        android:layout_below="@id/toolbarChat"
+        android:padding="5dp">
 
-        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
-        <Button
-            android:id="@+id/getmessage"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Selecciona un mensaje"
-            android:drawableLeft="@drawable/icon_ampliar"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="5dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="10dp"
-            android:gravity="center_vertical"
-            android:textSize="18sp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="55dp"
-            android:backgroundTint="@color/grey"
-            android:background="@drawable/rounded_button"/>
+    <Button
+        android:id="@+id/getmessage"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Selecciona un mensaje"
+        android:drawableLeft="@drawable/icon_ampliar"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp"
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="55dp"
+        android:backgroundTint="@color/grey"
+        android:background="@drawable/rounded_button"/>
 
-        <ImageButton
-            android:id="@+id/sendMessageButton"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/icon_send"
-            android:background="@drawable/circle_button2"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:tint="@color/white"
-            android:layout_toEndOf="@+id/getmessage"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="-52dp"
-            android:layout_marginBottom="5dp"/>
+    <ImageButton
+        android:id="@+id/sendMessageButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/icon_send"
+        android:background="@drawable/circle_button2"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:tint="@color/white"
+        android:layout_toEndOf="@+id/getmessage"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-52dp"
+        android:layout_marginBottom="5dp"/>
 
 </RelativeLayout>

@@ -14,7 +14,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
+import java.util.UUID;
 
 public class RegisterGroupActivity extends AppCompatActivity {
 
@@ -24,6 +27,7 @@ public class RegisterGroupActivity extends AppCompatActivity {
     private GroupProvider mGroupProvider;
     private AuthProvider mAuthProvider;
     private UserProvider mUserProvider;
+    //private ChatProvider mChatProvider;
 
     private TextInputEditText mTextInputName;
     private String code;
@@ -38,6 +42,7 @@ public class RegisterGroupActivity extends AppCompatActivity {
         mTextInputName = findViewById(R.id.textInputNameGroup);
         mUserProvider = new UserProvider();
         mAuthProvider = new AuthProvider();
+        //mChatProvider = new ChatProvider();
 
         mGroupProvider = new GroupProvider();
 
@@ -55,8 +60,24 @@ public class RegisterGroupActivity extends AppCompatActivity {
 
         if(!name.isEmpty()){
             String idU = mAuthProvider.getId();
+            grupo = new Group();
+            grupo.setId(mGroupProvider.getIdGroup());
+            grupo.setName(name);
+            grupo.setIdUser(idU);
+            grupo.setCode(code);
+            grupo.setTimestamp(new Date().getTime());
+            grupo.setNumberMessages(1);
+            grupo.setWriting("");
+            Random random = new Random();
+            int n = random.nextInt(100000);
+            grupo.setIdNotification(n);
 
-            grupo = new Group(mGroupProvider.getIdGroup(), idU, name, "url", code);
+            ArrayList<String> ids = new ArrayList<>();
+            ids.add(mAuthProvider.getId());
+
+            grupo.setIds(ids);
+
+            //grupo = new Group(mGroupProvider.getIdGroup(), idU, name, "url", code);
 
             mGroupProvider.create(grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -76,6 +97,35 @@ public class RegisterGroupActivity extends AppCompatActivity {
         }
 
     }
+
+    /*private void createChat(String name){
+        Random random = new Random();
+        int n = random.nextInt(100000);
+        Chat chat = new Chat();
+        chat.setId(UUID.randomUUID().toString());
+        chat.setGroupName(name);
+        chat.setTimestamp(new Date().getTime());
+        chat.setNumberMessages(1);
+        chat.setWriting("");
+        chat.setIdNotification(n);
+        chat.setMulti(true);
+
+        ArrayList<String> ids = new ArrayList<>();
+        ids.add(mAuthProvider.getId());
+
+        chat.setIds(ids);
+
+        mChatProvider.create(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(RegisterGroupActivity.this, "Chat creado", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(RegisterGroupActivity.this, "No se puedo crear el chat", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }*/
 
     private String generateCode(){
         Random r = new Random();

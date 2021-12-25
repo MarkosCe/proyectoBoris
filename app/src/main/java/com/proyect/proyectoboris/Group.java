@@ -6,23 +6,32 @@ import java.util.Map;
 
 public class Group {
 
-    String id;
-    String idUser;
-    String name;
-    String image;
-    String code;
-    Map<String, Boolean> members;
+    private String id;
+    private String idUser;
+    private String name;
+    private String image;
+    private String code;
+    private Map<String, Boolean> members;
+    private String writing;
+    private long timestamp;
+    private ArrayList<String> ids;
+    private int numberMessages;
+    private int idNotification;
 
     public Group(){ }
 
-    public Group(String id, String idUser, String name, String image, String code) {
+    public Group(String id, String idUser, String name, String image, String code, Map<String, Boolean> members, String writing, long timestamp, ArrayList<String> ids, int numberMessages, int idNotification) {
         this.id = id;
         this.idUser = idUser;
         this.name = name;
         this.image = image;
         this.code = code;
-        members = new HashMap<>();
-        members.put(idUser, true);
+        this.members = members;
+        this.writing = writing;
+        this.timestamp = timestamp;
+        this.ids = ids;
+        this.numberMessages = numberMessages;
+        this.idNotification = idNotification;
     }
 
     public String getId() {
@@ -71,5 +80,45 @@ public class Group {
 
     public void setMembers(Map<String, Boolean> members) {
         this.members = members;
+    }
+
+    public String getWriting() {
+        return writing;
+    }
+
+    public void setWriting(String writing) {
+        this.writing = writing;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public ArrayList<String> getIds() {
+        return ids;
+    }
+
+    public void setIds(ArrayList<String> ids) {
+        this.ids = ids;
+    }
+
+    public int getNumberMessages() {
+        return numberMessages;
+    }
+
+    public void setNumberMessages(int numberMessages) {
+        this.numberMessages = numberMessages;
+    }
+
+    public int getIdNotification() {
+        return idNotification;
+    }
+
+    public void setIdNotification(int idNotification) {
+        this.idNotification = idNotification;
     }
 }

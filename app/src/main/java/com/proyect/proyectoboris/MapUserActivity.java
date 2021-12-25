@@ -85,6 +85,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
     private boolean flag = false;
 
     private String keyId;
+    private String idChat;
 
     private ArrayList<String> members;
 
@@ -171,6 +172,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             mIsFirstTime = true;
             //flag = true;
             String idE = extras.getString("idgrupo");
+            idChat = idE;
             getMembers(idE);
             //ponemos visible los dos botones
             mButtonMessage.setVisibility(View.VISIBLE);
@@ -190,6 +192,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MapUserActivity.this, MessageActivity.class);
+                intent.putExtra("idChat",idChat);
                 startActivity(intent);
             }
         });
