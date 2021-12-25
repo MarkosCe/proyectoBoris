@@ -283,7 +283,8 @@ public class MessageActivity extends AppCompatActivity {
 
         String textMessage = mGetMessage.getText().toString();
         if (!textMessage.isEmpty()) {
-            final Message message = new Message();
+            Message message = new Message();
+            message.setId(mMessagesProvider.getIdMessage());
             message.setIdChat(mExtraidChat);
             message.setIdSender(mAuthProvider.getId());
             //message.setIdReceiver(mExtraIdUser);

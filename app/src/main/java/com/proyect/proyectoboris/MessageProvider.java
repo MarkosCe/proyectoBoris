@@ -28,7 +28,7 @@ public class MessageProvider {
         return mDataBase.child(message.getId()).setValue(message);
     }
 
-    public String getIdGroup(){
+    public String getIdMessage(){
         return mDataBase.push().getKey();
     }
 
