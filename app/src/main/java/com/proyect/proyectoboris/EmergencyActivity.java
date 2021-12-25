@@ -48,6 +48,9 @@ public class EmergencyActivity extends AppCompatActivity {
         });
          */
 
+        Bundle extras = this.getIntent().getExtras();
+        String idgrupo = extras.getString("idGrupo");
+
         mButtonEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
