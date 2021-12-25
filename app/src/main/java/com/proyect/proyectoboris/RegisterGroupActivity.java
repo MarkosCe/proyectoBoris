@@ -71,13 +71,6 @@ public class RegisterGroupActivity extends AppCompatActivity {
                     }
                 }
             });
-            String topic = grupo.getId();
-            FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    //Toast.makeText(EmergencyActivity.this, "suscrito al topico", Toast.LENGTH_SHORT).show();
-                }
-            });
         }else{
             Toast.makeText(RegisterGroupActivity.this, "Ingrese un nombre para el grupo", Toast.LENGTH_SHORT).show();
         }
