@@ -18,8 +18,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="El boton enviara un aviso a los contactos de tu circulo"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:text="El botón enviará un aviso a los contactos de tu grupo" />
 
         <Button
             android:id="@+id/emergency_button"

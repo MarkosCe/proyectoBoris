@@ -88,6 +88,7 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
 
     private ArrayList<String> members;
 
+
     //se ejecuta cada vez que el usuario se mueva
     private LocationCallback mlocationCallback = new LocationCallback() {
         @Override
