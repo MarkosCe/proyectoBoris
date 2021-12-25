@@ -91,7 +91,6 @@ public class RegisterGroupActivity extends AppCompatActivity {
                     }
                 }
             });
-
         }else{
             Toast.makeText(RegisterGroupActivity.this, "Ingrese un nombre para el grupo", Toast.LENGTH_SHORT).show();
         }

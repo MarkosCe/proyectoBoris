@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class EnteredCodeActivity extends AppCompatActivity {
 
@@ -62,8 +66,8 @@ public class EnteredCodeActivity extends AppCompatActivity {
                     if(snapshot.exists()) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             Group groupS = dataSnapshot.getValue(Group.class);
-                            if (codigo.equals(groupS.code)) {
-                                codigo = groupS.code;
+                            if (codigo.equals(groupS.getCode())) {
+                                codigo = groupS.getCode();
                                 exist = true;
                                 group = groupS;
                                 groupProvider.updateMembers(group, mAuthProvider.getId());
@@ -86,6 +90,13 @@ public class EnteredCodeActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
+            String topic = group.getId();
+            FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    //Toast.makeText(EmergencyActivity.this, "suscrito al topico", Toast.LENGTH_SHORT).show();
                 }
             });
         }else{
