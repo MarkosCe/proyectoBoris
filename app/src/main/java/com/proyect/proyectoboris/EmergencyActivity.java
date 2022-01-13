@@ -45,8 +45,9 @@ public class EmergencyActivity extends AppCompatActivity {
     private NotificationProvider mNotificationProvider;
     private GroupProvider groupPro;
     private UserProvider userProvider;
+    private AuthProvider mAuthProvider;
     private ArrayList<String> membersIds;
-    ArrayList<String> mReceiversIds = new ArrayList<>();
+    //ArrayList<String> mReceiversIds = new ArrayList<>();
     ArrayList<User> mReceivers = new ArrayList<>();
 
     private Button mButtonEmergency;
@@ -55,6 +56,7 @@ public class EmergencyActivity extends AppCompatActivity {
     private final static String CHANNEL_ID = "NOTIFICACION";
     private final static int NOTIFICACION_ID = 0;
     private String idgrupo;
+    private String idSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class EmergencyActivity extends AppCompatActivity {
         mNotificationProvider = new NotificationProvider();
         groupPro = new GroupProvider();
         userProvider = new UserProvider();
+        mAuthProvider = new AuthProvider();
 
         mButtonEmergency = findViewById(R.id.emergency_button);
 
@@ -112,6 +115,10 @@ public class EmergencyActivity extends AppCompatActivity {
 
             }
         });
+
+        /*idSource = mAuthProvider.getId();
+        membersIds.remove(idSource);*/
+
     }
 
     private void getReceiversInfo() {
