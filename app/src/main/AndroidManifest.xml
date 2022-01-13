@@ -44,12 +44,16 @@
             android:value="@string/google_maps_key" />
 
         <service
-            android:name=".FCM"
+            android:name=".services.MyFirebaseMessagingClient"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
 
     </application>
 

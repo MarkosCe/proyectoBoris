@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQueryEventListener;
@@ -48,6 +49,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.proyect.proyectoboris.providers.NotificationProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -208,6 +210,15 @@ public class MapUserActivity extends AppCompatActivity implements OnMapReadyCall
                 startActivity(intent);
             }
         });
+
+        createToken();
+
+        Toast.makeText(MapUserActivity.this, "onCreate", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void createToken(){
+        mUserProvider.createToken(mAuthProvider.getId());
     }
 
     private void getMembers(String idA){

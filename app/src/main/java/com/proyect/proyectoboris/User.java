@@ -7,18 +7,20 @@ public class User {
     String image;
     String phone;
     String code;
+    String token;
 
     public User(){
 
     }
 
-    public User(String id, String name, String email, String image, String phone, String code) {
+    public User(String id, String name, String email, String image, String phone, String code, String token) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.image = image;
         this.phone = phone;
         this.code = code;
+        this.token = token;
     }
 
     public String getId() {
@@ -67,5 +69,13 @@ public class User {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

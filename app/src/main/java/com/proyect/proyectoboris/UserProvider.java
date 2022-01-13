@@ -1,8 +1,15 @@
 package com.proyect.proyectoboris;
 
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +27,21 @@ public class UserProvider {
 
     public DatabaseReference getUser(String idUser){
         return mDataBase.child(idUser);
+    }
+
+    public void createToken(String idUser){
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()){
+                    return;
+                }
+                String token = task.getResult();
+                Map<String, Object> map = new HashMap<>();
+                map.put("token", token);
+                mDataBase.child(idUser).updateChildren(map);
+            }
+        });
     }
 
     public Task<Void> update(User user){
