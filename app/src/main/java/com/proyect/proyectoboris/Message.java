@@ -6,6 +6,7 @@ public class Message {
 
     private String id;
     private String idSender;
+    private String userName;
     private String idReceiver;
     private String idChat;
     private String message;
@@ -20,9 +21,10 @@ public class Message {
     public Message() {
     }
 
-    public Message(String id, String idSender, String idReceiver, String idChat, String message, String status, String url, String type, String fileName, ArrayList<String> receivers, long timestamp) {
+    public Message(String id, String idSender, String userName, String idReceiver, String idChat, String message, String status, String url, String type, String fileName, ArrayList<String> receivers, long timestamp) {
         this.id = id;
         this.idSender = idSender;
+        this.userName = userName;
         this.idReceiver = idReceiver;
         this.idChat = idChat;
         this.message = message;
@@ -48,6 +50,14 @@ public class Message {
 
     public void setIdSender(String idSender) {
         this.idSender = idSender;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getIdReceiver() {

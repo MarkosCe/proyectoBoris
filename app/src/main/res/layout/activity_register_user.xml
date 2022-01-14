@@ -13,13 +13,30 @@
         android:orientation="vertical"
         android:layout_marginTop="20dp">
 
-        <ImageView
-            android:id="@+id/imageViewProfile"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/ubicacion"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageViewProfile"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_person"
+                app:civ_circle_background_color="@color/colorGray"
+                app:civ_border_color="@color/colorGray"
+                app:civ_border_width="3dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="20dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_camera"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_gravity="bottom|center"
+                android:layout_marginStart="60dp"/>
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +53,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp">
+                android:layout_marginStart="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputName"

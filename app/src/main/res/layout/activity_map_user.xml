@@ -42,9 +42,9 @@
         android:layout_height="wrap_content"
         android:contentDescription="btnpanico"
         android:layout_gravity="bottom|end"
-        app:srcCompat="@drawable/circle_button"
+        android:src="@drawable/ic_alert"
         app:maxImageSize="35dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/redDark"
         android:layout_marginVertical="195dp"
         android:layout_marginEnd="10dp"/>
 

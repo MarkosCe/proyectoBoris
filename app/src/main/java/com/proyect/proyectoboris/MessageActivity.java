@@ -1,10 +1,13 @@
 package com.proyect.proyectoboris;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -16,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -50,7 +54,7 @@ public class MessageActivity extends AppCompatActivity {
     //FilesProvider mFilesProvider;
     //NotificationProvider mNotificationProvider;
 
-    //ImageView mImageViewBack;
+    ImageView mImageViewBack;
     //TextView mTextViewUsername;
     //TextView mTextViewOnline;
     //CircleImageView mCircleImageUser;
@@ -125,7 +129,7 @@ public class MessageActivity extends AppCompatActivity {
                 .setScreenOrientation(Options.SCREEN_ORIENTATION_PORTRAIT)
                 .setPath("/pix/images");*/
 
-        //showChatToolbar(R.layout.chat_toolbar);
+        showChatToolbar(R.layout.chat_toolbar);
         getUserReceiverInfo();
         getMyUserInfo();
 
@@ -287,6 +291,7 @@ public class MessageActivity extends AppCompatActivity {
             message.setId(mMessagesProvider.getIdMessage());
             message.setIdChat(mExtraidChat);
             message.setIdSender(mAuthProvider.getId());
+            message.setUserName(mMyUser.getName());
             //message.setIdReceiver(mExtraIdUser);
             message.setMessage(textMessage);
             message.setStatus("ENVIADO");
@@ -491,7 +496,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     private void showChatToolbar (int resource) {
-        /*Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
@@ -502,16 +507,16 @@ public class MessageActivity extends AppCompatActivity {
         actionBar.setCustomView(view);
 
         mImageViewBack = view.findViewById(R.id.imageViewBack);
-        mTextViewUsername = view.findViewById(R.id.textViewUsername);
+        /*mTextViewUsername = view.findViewById(R.id.textViewUsername);
         mCircleImageUser = view.findViewById(R.id.circleImageUser);
-        mTextViewOnline = view.findViewById(R.id.textViewOnline);
+        mTextViewOnline = view.findViewById(R.id.textViewOnline);*/
 
         mImageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
-        });*/
+        });
     }
 
     @Override

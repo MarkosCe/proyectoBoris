@@ -79,6 +79,9 @@ public class MessageAdapter extends FirebaseRecyclerAdapter<Message, MessageAdap
             ViewGroup.MarginLayoutParams marginDate = (ViewGroup.MarginLayoutParams) holder.textViewDate.getLayoutParams();
             marginDate.rightMargin = 20;
 
+            holder.textViewUserName.setVisibility(View.VISIBLE);
+            holder.textViewUserName.setText(message.getUserName());
+
         }
 
         /*showImage(holder, message);
@@ -175,6 +178,7 @@ public class MessageAdapter extends FirebaseRecyclerAdapter<Message, MessageAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        TextView textViewUserName;
         TextView textViewMessage;
         TextView textViewDate;
         ImageView imageViewCheck;
@@ -187,6 +191,7 @@ public class MessageAdapter extends FirebaseRecyclerAdapter<Message, MessageAdap
         public ViewHolder(View view) {
             super(view);
             myView = view;
+            textViewUserName = view.findViewById(R.id.textViewUserName);
             textViewMessage = view.findViewById(R.id.textViewMessage);
             textViewDate = view.findViewById(R.id.textViewDate);
             imageViewCheck = view.findViewById(R.id.imageViewCheck);

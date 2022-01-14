@@ -123,21 +123,23 @@ public class EmergencyActivity extends AppCompatActivity {
 
     private void getReceiversInfo() {
 
-        for (String id: membersIds){
-            userProvider.getUser(id).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        User user = snapshot.getValue(User.class);
-                        mReceivers.add(user);
+        if(membersIds != null) {
+            for (String id : membersIds) {
+                userProvider.getUser(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            User user = snapshot.getValue(User.class);
+                            mReceivers.add(user);
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
+                    }
+                });
+            }
         }
 
     }
